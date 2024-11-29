@@ -45,4 +45,9 @@ public class Card
    public int getSuit() {
       return suit;
    }
+	
+	public String toString() 
+	{
+   	return face + " of " + suit + "\n"; 
+   }
 }

@@ -19,7 +19,7 @@ public class Hand
       - INPUT: None
       - PROCCESS: Assigns instance data and creates Hand object
       - OUTPUT: Hand object with empty array size/length 12 
-   */		
+       */		
 	public Hand()
    {	
 		numOfCards = 0;

@@ -13,6 +13,7 @@ public class Deck
    //we are going to have 2 deck methods so make the Card array a instance class variable to use it in both
    //we also need to track where to put each card in each deck array so we need a integer for that
    private Card[] deck;
+   private int cardIndex;
    
     /* 
       - DEFAULT CONSTRUCTOR: Creates our deck object with 52 cards (Constructors should have capital!)
@@ -23,8 +24,8 @@ public class Deck
 
    public Deck()
    {
-      //Our default deck will be 52 cards so set the array to that
-      
+      //Our default deck will be 52 cards so set the array to that and begin our index at 0
+      cardIndex = 0;
       deck = new Card[52];
       
       //call our helper method to fill our array for us
@@ -40,8 +41,14 @@ public class Deck
       - PROCCESS: Fills the deck array with cards and assigns it as instance data to the object
       - OUTPUT: Deck object with an array of length 52 * n, each index filled with a card object
    */
+   
+   //same as default constructor but with a int paramter for # of decks
    public Deck(int numberOfDecks)
    {
+      //Our default deck will be 52 cards so set the array to that then multiply it by given parameter
+      //begin our cards index at 0
+
+      cardIndex = 0;
       this.deck = new Card[52 * numberOfDecks];
       
       fillDeckArray(numberOfDecks);
@@ -62,8 +69,7 @@ public class Deck
   private void fillDeckArray(int numOfDecks)
   {  
       //create a variable to keep track of the posistion in the arrays index during the loop that we can increment
-      int cardIndex =0;
-      
+      cardIndex =0;     
       
       //creating a loop to make sure we make N number of decks using our parameter not just 1 deck
       for (int n=0; n<numOfDecks; n++)
@@ -87,6 +93,7 @@ public class Deck
       - PROCCESS: Fills the deck array with cards and assigns it as instance data to the object
       - OUTPUT: Deck object with an array of length 52 * n, each index filled with a card object
    */
+   
    public void shuffle()
    {
       //declare all variables, we will need to use random class, variable of Card type for temp place holder and a int for a random index
@@ -109,5 +116,22 @@ public class Deck
          deck[randomIndex] = placeHolder;
       }
    
-   } //end class
-}
+   } //end shuffle method
+   
+   
+   /* 
+    - ACTION METHOD: Deal a card from a deck object and update its array accordingly
+    - INPUT: None
+    - PROCCESS: Retrieves the card at the current cardIndex and increments it to simulate card removal
+    - OUTPUT: The card object we removed from the deck objects array
+   */
+   
+   public Card dealCard()
+   {
+      Card dealtCard = deck[cardIndex];
+      cardIndex++;
+      return dealtCard;    
+   }
+   
+   
+}//end clas

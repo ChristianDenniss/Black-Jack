@@ -47,6 +47,7 @@ public class Deck
    {
       //Our default deck will be 52 cards so set the array to that then multiply it by given parameter
       //begin our cards index at 0
+		//use helper method to fill array
 
       cardIndex = 0;
       this.deck = new Card[52 * numberOfDecks];
@@ -136,6 +137,5 @@ public class Deck
       cardIndex++;
       return dealtCard;    
    }
-   
    
 }//end clas

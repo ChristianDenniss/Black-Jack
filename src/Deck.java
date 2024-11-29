@@ -128,6 +128,10 @@ public class Deck
    
    public Card dealCard()
    {
+      //get the value of the card at our current cardIndex assign it to a variable
+      //increment the index so we can now skip over the card
+      //return the variable with its value assign
+      
       Card dealtCard = deck[cardIndex];
       cardIndex++;
       return dealtCard;    

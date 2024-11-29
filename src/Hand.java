@@ -90,6 +90,7 @@ public class Hand
 			//add the face value of the card at index i to sum
 			//check IF the value of face was 1 and it's the first 1 / ace using firstAce == 0
 				//if this is true add 10 to our sum integer, this will simulate adding 11 because we've already added it as 1
+		//once sum has been totalled if sum is >21, and firstAce is equal to 1, minus 10 from sum simulating setting the original ace back to 1
 				
 		int sum = 0;
 		int firstAce =0;
@@ -103,6 +104,11 @@ public class Hand
 				firstAce =1;
 			}
 			
+		}
+		
+		if (sum >21 && firstAce == 1)
+		{
+				sum = sum - 10;			
 		}
 				
 		return sum;

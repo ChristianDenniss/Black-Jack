@@ -171,7 +171,7 @@ public class GameDriver
                System.out.println("New Balance: " + money); 
             }
             
-         } // End of else block for "dealer's face-up card" and the game continuation
+         } // end of else block for "dealer's face-up card" and the game continuation
          
          System.out.println("Would you like to play again? (y/n)");
          anotherGame = myScanner.nextLine();
@@ -189,9 +189,10 @@ public class GameDriver
       {
          System.out.println("You won a total of $" + (1000 - money));
       }
-   } // End of main method
+   } // end of main method
 
-   // Helper method to print dealer's hand
+   // Helper method to print dealer's hand to make my code much less repetitive
+   //just printing to screen using our created sum hand and print hand methods
    private static void printDealerHand(Hand dealerHand) {
       System.out.println("Dealer's total was: " + dealerHand.sumHand());
       System.out.println("Dealer's cards were: " + dealerHand.printHand(true));

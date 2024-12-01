@@ -59,7 +59,7 @@ public class Hand
 		//return hand
 		
 		String hand ="";
-		if (isDealer == true)
+		if (isDealer == false)
 		{
 			for (int i=0; i< numOfCards; i++)
 			{	
@@ -68,7 +68,7 @@ public class Hand
 		}
 		else
 		{
-			hand += "Mystery\n";
+			hand += "Mystery, ";
 			for (int i=1; i< numOfCards; i++)
 			{	
 				hand += cardsInHand[i].toString();
@@ -103,6 +103,12 @@ public class Hand
 				sum = sum +10;
 				firstAce =1;
 			}
+         
+         //if the value of the card is >10 (joker jack queen king have it be equal to 10)
+         if (cardsInHand[i].getFace() > 10)
+			{
+				sum = sum-(cardsInHand[i].getFace() - 10);
+			}
 			
 		}
 		
@@ -113,6 +119,17 @@ public class Hand
 				
 		return sum;
 	}
+   
+   public int getNumOfCards() 
+   {
+      return numOfCards;
+   }
+   
+   public Card getCard(int index) 
+   {
+      return cardsInHand[index];
+   }
+
 	
     
 } // end hand class

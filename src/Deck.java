@@ -13,7 +13,7 @@ public class Deck
    //we are going to have 2 deck methods so make the Card array a instance class variable to use it in both
    //we also need to track where to put each card in each deck array so we need a integer for that
    private Card[] deck;
-   private int cardIndex;
+   private int cardIndex =0;
    
     /* 
       - DEFAULT CONSTRUCTOR: Creates our deck object with 52 cards (Constructors should have capital!)
@@ -70,7 +70,7 @@ public class Deck
   private void fillDeckArray(int numOfDecks)
   {  
       //create a variable to keep track of the posistion in the arrays index during the loop that we can increment
-      cardIndex =0;     
+      cardIndex = 0;     
       
       //creating a loop to make sure we make N number of decks using our parameter not just 1 deck
       for (int n=0; n<numOfDecks; n++)
@@ -79,7 +79,7 @@ public class Deck
          for (int i = 0; i<4; i++) 
          {
             //cards value/face loop, there is 13 values in cards so we need to get all 13 values PER suit
-            for (int j=0; j<13; j++) 
+            for (int j=1; j<14; j++) 
             {
                deck[cardIndex++] = new Card(i,j);
             }
@@ -128,13 +128,20 @@ public class Deck
    */
    
    public Card dealCard()
-   {
+   {  
+      cardIndex--;
+      
       //get the value of the card at our current cardIndex assign it to a variable
       //increment the index so we can now skip over the card
       //return the variable with its value assign
       
+      
+      if (cardIndex >= deck.length) 
+      {
+        throw new IllegalStateException("No more cards in the deck to deal.");
+      }
+      
       Card dealtCard = deck[cardIndex];
-      cardIndex++;
       return dealtCard;    
    }
    

@@ -48,6 +48,88 @@ public class Card
 	
 	public String toString() 
 	{
-   	return face + " of " + suit + "\n"; 
+      String cardR = "";
+      String suitR = "";
+      
+      if (suit == 0)
+      { 
+         suitR = "Hearts";
+      }
+      else if (suit == 1)
+      { 
+         suitR = "Spades";
+      }
+      else if (suit == 2)
+      { 
+         suitR = "Clubs";
+      }
+      else if (suit == 3)
+      { 
+         suitR = "Diamonds";
+      }
+      else 
+      {
+         suitR = "Unrecognized Value";
+      }
+      
+      
+      if (face == 1)
+      { 
+         cardR = "Ace";
+      }
+      else if (face == 2)
+      { 
+         cardR = "Two";
+      }
+      else if (face == 3)
+      { 
+         cardR = "Three";
+      }
+      else if (face == 4)
+      { 
+         cardR = "Four";
+      }
+      else if (face == 5)
+      { 
+         cardR = "Five";
+      }
+      else if (face == 6)
+      { 
+         cardR = "Six";
+      }
+      else if (face == 7)
+      { 
+         cardR = "Seven";
+      }
+      else if (face == 8)
+      { 
+         cardR = "Eight";
+      }
+      else if (face == 9)
+      { 
+         cardR = "Nine";
+      }
+      else if (face == 10)
+      { 
+         cardR = "Ten";
+      }
+      else if (face == 11)
+      { 
+         cardR = "Jack";
+      }
+      else if (face == 12)
+      { 
+         cardR = "Queen";
+      }
+      else if (face == 13)
+      { 
+         cardR = "King";
+      }
+      else 
+      {
+         suitR = "Unrecognized Value";
+      }
+
+   	return cardR + " of " + suitR + ", "; 
    }
 }

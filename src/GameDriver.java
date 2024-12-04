@@ -30,13 +30,15 @@ public class GameDriver
       
       //Create and shuffle deck using our deck constructor and shuffle method
       //keep outside of loop so we can keep playing from the same deck in separate games
-      System.out.println("Creating deck of 52 * " + numberOfDecks + " cards long...");
+		
+      System.out.println("Creating deck of 52 * " + numberOfDecks + " cards...");
       myDeck = new Deck(numberOfDecks);
       System.out.println("Shuffling Deck...");
       myDeck.shuffle();
          
       //put the entire game process inside a do-while loop as we will be playing at least one time
       //check if money < 200 as this is our minimum to play, if less print that and then leave the loop
+		
       do
       {
          if (money < 200)
@@ -50,10 +52,12 @@ public class GameDriver
                          
 
          //create a hand for the player and one for the dealer using our Hand constructor so they will be refreshed every single game
+			
          playerHand = new Hand();
          dealerHand = new Hand();
 
          // Deal starting cards (2 each) to player and dealer 
+			
          System.out.println("Giving you and the dealer your initial cards...");
          playerHand.addCard(myDeck.dealCard());
          dealerHand.addCard(myDeck.dealCard());
@@ -64,6 +68,7 @@ public class GameDriver
          // set the player sum variable = playerHand object with . sumHand method
          //set printed Hand = playerHand object with .printHand method, we will give .printHand false to indicate it's not the dealer
          //print these variables to screen for user to see
+			
          playerSum = playerHand.sumHand();
          printedHand = playerHand.printHand(false);
 
@@ -83,7 +88,7 @@ public class GameDriver
          {
             System.out.println("You Win! You have hit 21 on your first 2 cards! You win an extra $100 totalling to $300.");
             printDealerHand(dealerHand);
-            money += 200 + (200 * 1.5);
+            money += 500;
             System.out.println("New Balance: " + money);
          }
          else if (dealerHand.sumHand() == 21 && playerHand.sumHand() == 21)
@@ -97,6 +102,7 @@ public class GameDriver
          //prompt them to hit (draw another card from deck into their hand) or stay (test their current handSum value against the dealers)
          //they must choose to hit or stay atleast once so its a do while loop
          //set user choice variable = to their input, make it non case sensitive or convert to lower case before equating it
+			
          else
          {
             System.out.println("Dealer's face-up card: " + dealerHand.getCard(0).toString());
@@ -117,6 +123,7 @@ public class GameDriver
                //if user selects hit, add another card to their playerHand object using our methods
                //if they do not select hit then we can set the loop conditon to false and exit the loop!
                //print the card they drew and the new sum value of their hand to the screen
+					
                if (userChoice.equals("hit"))
                {
                   playerHand.addCard(myDeck.dealCard());
@@ -125,12 +132,14 @@ public class GameDriver
                   System.out.println("Your hand is currently of the value: " + playerSum);
                   
                   //if player hand sum >= 21 after drawing a new card set the loop boolean to false so we can exit and calculate results
+						
                   if (playerHand.sumHand() >= 21)
                   {
                      isPlayerHitting = false;
                   }
                   
                   //if hand sum doesn't equal or exceed 21 continue the loop to ask them to hit or stay again
+						
                   else
                   {
                      isPlayerHitting = true;
@@ -143,6 +152,12 @@ public class GameDriver
             } while (isPlayerHitting == true); // End of do-while loop for the player's turn
 
             // After the loop, compare the hands and determine the winner
+				
+				
+				//check if player hand is less than or equal 21 and greater dealer, Win
+				//return bet + winnings (400 dollars)
+				//print new balance
+				
             if (playerHand.sumHand() <= 21 && playerHand.sumHand() > dealerHand.sumHand()) 
             {
                System.out.println("You won! Your bet has been returned with an additonal $200 won.");
@@ -150,7 +165,11 @@ public class GameDriver
                money += 400;
                System.out.println("New Balance: " + money);               
             }
-             
+            
+				//check if player hand is a bust (>21) and dealer hand is not >21, Lose 				
+				//don't return money. do nothing to balance as we already took the money initially
+				//print new balance
+				
             else if (playerHand.sumHand() > 21 && dealerHand.sumHand() <21) 
             {
                System.out.println("You busted! Your hand value was greater than 21, Your bet has been lost.");
@@ -158,12 +177,34 @@ public class GameDriver
                System.out.println("New Balance: " + money); 
             } 
             
+				//check if player hand is a bust (>21) and dealer hand is also a bust (>21), Tie 				
+				//return bet money (200) to money var because we intially took it
+				//print new balance
+				
             else if (playerHand.sumHand() > 21 && dealerHand.sumHand() > 21) 
             {
                System.out.println("You both busted! both hands exceed 21 Your bet has been returned.");
                printDealerHand(dealerHand);
+					money += 200;
                System.out.println("New Balance: " + money); 
             }
+				
+				//check if player hand is <21, and if player hand equal to dealer hand, Tie				
+				//return bet money (200) to money var because we intially took it
+				//print new balance
+				
+				else if (playerHand.sumHand() > 21 && playerHand.sumHand() == dealerHand.sumHand()) 
+            {
+               System.out.println("You Tied! Dealers hand was the same yours, Your bet has been returned.");
+               printDealerHand(dealerHand);
+					money += 200;
+               System.out.println("New Balance: " + money); 
+            }
+				
+				//else if none of those conditions were met we just plain lose without busting				
+				//don't return money. do nothing to balance as we already took the money initially
+				//print new balance
+				
             else
             {
                System.out.println("You Lost! Dealers hand was closer to 21 than yours, Your bet has been lost.");
@@ -171,14 +212,18 @@ public class GameDriver
                System.out.println("New Balance: " + money); 
             }
             
-         } // end of else block for "dealer's face-up card" and the game continuation
+         } 
          
+			//prompt the user to continue the game loop
+			//take their input and determine to reloop or not
+			
          System.out.println("Would you like to play again? (y/n)");
          anotherGame = myScanner.nextLine();
 
       } while (anotherGame.equalsIgnoreCase("y"));
 
-      // Final money summary
+      //Output Final money summary once game ends so user can see their changes and progress
+		
       System.out.println("Money Summary;\nYou started with $1000.00 and went to $" + money);
       if (money < 1000) 
       {
@@ -193,6 +238,7 @@ public class GameDriver
 
    // Helper method to print dealer's hand to make my code much less repetitive
    //just printing to screen using our created sum hand and print hand methods
+	
    private static void printDealerHand(Hand dealerHand) {
       System.out.println("Dealer's total was: " + dealerHand.sumHand());
       System.out.println("Dealer's cards were: " + dealerHand.printHand(true));
